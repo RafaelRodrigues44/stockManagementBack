@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import { ProductEntry, ProductExit } from '../models/ProductManager';
+import { calculateTotalStock, calculateStockByProductId } from '../services/stockService'; 
 
 export const validateCreateEntry = [
     body('productId').isInt().withMessage('Product ID must be an integer.'),
@@ -44,6 +45,14 @@ export const createExit = async (req: Request, res: Response): Promise<void> => 
     const { productId, quantity, price, batch } = req.body;
 
     try {
+
+        const { totalStockQuantity } = await calculateStockByProductId(productId);
+
+        if (quantity > totalStockQuantity) {
+            res.status(400).json({ message: `Insufficient stock for product ID ${productId}. Available: ${totalStockQuantity}` });
+            return;
+        }
+
         const exit = await ProductExit.create({ productId, quantity, price, batch, date: new Date() });
         res.status(201).json(exit);
     } catch (error: unknown) {
@@ -69,5 +78,15 @@ export const getExits = async (req: Request, res: Response): Promise<void> => {
     } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
         res.status(500).json({ message: 'Error fetching exits', error: errorMessage });
+    }
+};
+
+export const getTotalStock = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const totalStock = await calculateTotalStock();
+        res.status(200).json(totalStock);
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        res.status(500).json({ message: 'Error fetching total stock', error: errorMessage });
     }
 };
