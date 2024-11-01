@@ -3,7 +3,7 @@ import { calculateTotalStock } from '../services/stockService';
 
 const router = Router();
 
-router.get('/stock', async (req: Request, res: Response): Promise<void> => {
+router.get('/', async (req: Request, res: Response): Promise<void> => {
     try {
         const totalStockInfo = await calculateTotalStock();
         res.status(200).json(totalStockInfo);
