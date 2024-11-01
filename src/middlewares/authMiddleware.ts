@@ -10,7 +10,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction): void =
     }
 
     try {
-        jwt.verify(token, process.env.JWT_SECRET!); // Apenas verifica o token
+        jwt.verify(token, process.env.JWT_SECRET!); 
         next(); 
     } catch (error) {
         res.status(400).json({ message: 'Invalid token.' });

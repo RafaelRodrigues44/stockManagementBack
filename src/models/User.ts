@@ -1,14 +1,16 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../config/database';
 
-interface UserAttributes {
+export interface UserAttributes {
   id: number;
   name: string;
   email: string;
   password: string;
 }
 
-class User extends Model<UserAttributes> implements UserAttributes {
+export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+
+class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: number;
   public name!: string;
   public email!: string;

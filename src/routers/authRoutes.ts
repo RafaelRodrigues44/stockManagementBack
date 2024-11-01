@@ -3,7 +3,7 @@ import { login } from '../controllers/authController';
 
 const router = Router();
 
-router.post('/login', async (req: Request, res: Response): Promise<void> => {
+router.post('/', async (req: Request, res: Response): Promise<void> => {
     try {
         const result = await login(req, res);
         res.json(result);
