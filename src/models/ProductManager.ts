@@ -9,6 +9,8 @@ class ProductEntry extends Model {
   public price!: number; 
   public batch!: string; 
   public date!: Date;
+
+  public Product?: Product; 
 }
 
 ProductEntry.init(
@@ -46,6 +48,8 @@ ProductEntry.init(
   }
 );
 
+ProductEntry.belongsTo(Product, { foreignKey: 'productId' });
+
 class ProductExit extends Model {
   public id!: number;
   public productId!: number; 
@@ -53,6 +57,8 @@ class ProductExit extends Model {
   public price!: number; 
   public batch!: string; 
   public date!: Date;
+
+  public Product?: Product; 
 }
 
 ProductExit.init(
@@ -89,5 +95,7 @@ ProductExit.init(
     tableName: 'product_exits',
   }
 );
+
+ProductExit.belongsTo(Product, { foreignKey: 'productId' });
 
 export { ProductEntry, ProductExit };

@@ -5,8 +5,8 @@ class Product extends Model {
   public id!: number;
   public name!: string;
   public description!: string;
-  public manufacturer!: string; // Campo obrigatório
-  public image!: Buffer | null; // Campo de imagem
+  public manufacturer!: string; 
+  public image!: Buffer | null; 
 }
 
 Product.init(
