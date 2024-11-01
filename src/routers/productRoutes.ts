@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { createProduct, getProducts, updateProduct, deleteProduct } from '../controllers/productController';
+import { createProduct, getProducts, updateProduct, deleteProduct, getProductById } from '../controllers/productController';
 import authMiddleware from '../middlewares/authMiddleware';
 import multer from 'multer';
 
@@ -17,6 +17,14 @@ router.post('/', authMiddleware, upload.single('image'), async (req: Request, re
 router.get('/', authMiddleware, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         await getProducts(req, res); 
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get('/:id', authMiddleware, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        await getProductById(req, res); 
     } catch (error) {
         next(error);
     }
