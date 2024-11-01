@@ -14,8 +14,8 @@ export const calculateTotalStock = async () => {
             totalStockQuantity,
             totalEntryQuantity,
             totalExitQuantity,
-            productDetails: entries.map(entry => ({
-                id: entry.id || null,
+            entryDetails: entries.map(entry => ({
+                entryId: entry.id || null,
                 name: entry.Product ? entry.Product.name : 'Unknown',
                 quantity: entry.quantity || 'Unknown',
                 date: entry.date || 'Unknown',
@@ -41,8 +41,8 @@ export const calculateStockByProductId = async (productId: number) => {
             totalStockQuantity,
             totalEntryQuantity,
             totalExitQuantity,
-            productDetails: entries.map(entry => ({
-                id: entry.id || null,
+            entryDetails: entries.map(entry => ({
+                entryId: entry.id || null,
                 name: entry.Product ? entry.Product.name : 'Unknown',
                 quantity: entry.quantity || 'Unknown',
                 date: entry.date || 'Unknown',
