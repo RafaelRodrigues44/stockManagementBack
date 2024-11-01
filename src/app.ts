@@ -5,6 +5,7 @@ import { syncDatabase } from '../src/config/database';
 import authRoutes from './routers/authRoutes';
 import productRoutes from './routers/productRoutes';
 import userRoutes from './routers/userRoutes';
+import productManagerRoutes from './routers/productManagerRoutes'
 
 const app: Application = express();
 
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 app.use('/api/users', userRoutes); 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/stock', productManagerRoutes);
 app.use('/api/auth', authRoutes);
 
 const startServer = async () => {
