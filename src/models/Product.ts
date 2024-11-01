@@ -5,9 +5,8 @@ class Product extends Model {
   public id!: number;
   public name!: string;
   public description!: string;
-  public price!: number;
-  public quantity!: number;
-  public image!: Buffer | null;
+  public manufacturer!: string; // Campo obrigatório
+  public image!: Buffer | null; // Campo de imagem
 }
 
 Product.init(
@@ -20,13 +19,9 @@ Product.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    price: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    manufacturer: {
+      type: DataTypes.STRING, 
+      allowNull: false, 
     },
     image: {
       type: DataTypes.BLOB('long'),
