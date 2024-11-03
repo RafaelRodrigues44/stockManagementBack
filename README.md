@@ -1,7 +1,3 @@
-Claro! Vamos adicionar uma seção detalhada ao README que inclui os endpoints da API, as classes e as funções, juntamente com descrições do que cada um faz. Aqui está o README atualizado:
-
----
-
 # Stock Manager API
 
 ## Descrição
