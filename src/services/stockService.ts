@@ -91,3 +91,23 @@ export const calculateStockByProductId = async (productId: number) => {
         throw new Error('Error calculating stock for product: ' + (error instanceof Error ? error.message : 'Unknown error occurred'));
     }
 };
+
+export const inventoryData = async () => {
+    const totalStockInfo = await calculateTotalStock();
+
+    const inventoryTableData = totalStockInfo.map(product => {
+        const totalValueInStock = product.entryDetails.reduce((acc: number, entry: any) => {
+            return acc + (entry.price * entry.quantity); 
+        }, 0);
+
+        return {
+            id: product.productId,
+            name: product.entryDetails.length > 0 ? product.entryDetails[0].name : 'Unknown',
+            quantityInStock: product.totalStockQuantity,
+            totalValueInStock: totalValueInStock.toFixed(2) 
+        };
+    });
+
+    return inventoryTableData;
+};
+
