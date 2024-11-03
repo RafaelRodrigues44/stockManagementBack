@@ -1,15 +1,14 @@
 import { Router, Request, Response } from 'express';
-import { login } from '../controllers/authController';
+import { validateLogin, login } from '../controllers/authController';
 
 const router = Router();
 
-router.post('/', async (req: Request, res: Response): Promise<void> => {
-    try {
-        const result = await login(req, res);
-        res.json(result);
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+router.post('/login', validateLogin, async (req: Request, res: Response) => {
+  try {
+    await login(req, res);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
 });
 
-export default router
+export default router;
