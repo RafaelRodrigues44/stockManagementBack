@@ -1,5 +1,3 @@
-// userController.ts
-
 import { Request, Response } from 'express';
 import User, { UserAttributes } from '../models/User';
 import bcrypt from 'bcrypt';
