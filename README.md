@@ -54,7 +54,7 @@ cd src
 ```
 
 ```bash
-ts-node serve.ts
+npx ts-node serve.ts
 ```
 
 ## Endpoints da API
