@@ -50,7 +50,11 @@ docker-compose up -d
 Em um terminal separado, inicie a API:
 
 ```bash
-npm run start
+cd src
+```
+
+```bash
+ts-node serve.ts
 ```
 
 ## Endpoints da API
